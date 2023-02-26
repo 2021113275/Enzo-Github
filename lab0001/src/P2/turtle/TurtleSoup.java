@@ -151,45 +151,54 @@ public class TurtleSoup {
      * @param points a set of points with xCoords and yCoords. It might be empty, contain only 1 point, two points or more.
      * @return minimal subset of the input points that form the vertices of the perimeter of the convex hull
      */
-    public static Set<Point> convexHull(Set<Point> points) {  //����͹��
+    public static Set<Point> convexHull(Set<Point> points) {  
         //throw new RuntimeException("implement me!");
     	ArrayList<Point> tubao=new ArrayList<Point>();
     	ArrayList<Point> temppoint=new ArrayList<Point>();
-    	temppoint.addAll(points);  //�����µĵ㼯����ֹ��ԭ�е�point�����˸ı�
+    	temppoint.addAll(points);  
     	int length;
     	length=temppoint.size();
-    	if(length<=3) {  //����������ֱ����͹��
+    	if(length<=3) 
+	{  
     		return points;
     	}
-    	else {
-    		Point one=temppoint.get(0);  //�����ҵ����½ǵĵ���Ϊ��ʼ��
+    	else 
+	{
+    		Point one=temppoint.get(0);  
     		for(Point temp:points) {
-    			if(temp.x()<one.x()) {
+    			if(temp.x()<one.x())
+			{
     				one=temp;
     			}
-    			else if(temp.x()==one.x()&&temp.y()<one.y()) {
+    			else if(temp.x()==one.x()&&temp.y()<one.y()) 
+			{
     				one=temp;
     			}
     		}
-    		tubao.add(one); //�������½ǳ�ʼ�����͹������
+    		tubao.add(one); 
     		int i=0;
-    		temppoint.remove(one);  //ԭ���ϳ�ȥ��ʼ��
+    		temppoint.remove(one); 
     		Point forpoint=one;
-    		do {
-    			if(i==1) {
-    				temppoint.add(one);  //���¼�����ʼ���жϽ�ֹ
+    		do 
+		{
+    			if(i==1) 
+			{
+    				temppoint.add(one);  
     			}
     			double toangle=360,todif=0;
-    			Point topoint=null;  //��Ҫ����ĵ�
-    			for(Point temp:temppoint) {
-    				double tempdushu=calculateBearingToPoint(0,(int)forpoint.x(),(int)forpoint.y(),(int)temp.x(),(int)temp.y());//ǰһ���㵽�����е��ƫת��
-    				double tempdistance=Math.pow(forpoint.x() - temp.x(), 2) + Math.pow(forpoint.y() - temp.y(), 2);//�������
-    				if(tempdushu<toangle) {  //�ҵ���С��ƫת��
+    			Point topoint=null;  
+    			for(Point temp:temppoint) 
+			{
+    				double tempdushu=calculateBearingToPoint(0,(int)forpoint.x(),(int)forpoint.y(),(int)temp.x(),(int)temp.y());
+    				double tempdistance=Math.pow(forpoint.x() - temp.x(), 2) + Math.pow(forpoint.y() - temp.y(), 2);
+    				if(tempdushu<toangle) 
+				{  
     					toangle=tempdushu;
     					topoint=temp;
     					todif=tempdistance;
     				}
-    				else if(tempdushu==toangle&&tempdistance>todif) { //��������ͬ������Զ�ĵ�
+    				else if(tempdushu==toangle&&tempdistance>todif) 
+				{ 
     					topoint=temp;
     					todif=tempdistance;
     				}	
